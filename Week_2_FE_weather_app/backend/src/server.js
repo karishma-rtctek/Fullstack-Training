@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 // Import weather route (correct path)
-const weatherRoutes = require('../routes/weather.routes');
+const weatherRoutes = require('../routes/weatherRoutes');
 app.use('/api/weather', weatherRoutes);
 
 // Placeholder for future features
