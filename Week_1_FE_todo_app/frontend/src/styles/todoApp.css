@@ -1,0 +1,127 @@
+/* Center app on screen */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* App container */
+.app-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* Heading */
+.app-container h1 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Form */
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  padding: 0.5rem 1rem;
+  background: #4cafef;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+form button:hover {
+  background: #3a9bdc;
+}
+
+/* Todo list */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #f9f9f9;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  cursor: pointer;
+}
+
+li button {
+  /* background: #ff4d4d; */
+  border: none;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+li button:hover {
+  background: crimson;
+}
+
+/* History toggle */
+.history-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #6666ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.history-btn:hover {
+  background: #5555dd;
+}
+
+/* Completed todos (history list) */
+.headingLeft {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.textBlack {
+  color: black;
+}
+
+.history-list {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.history-list li {
+  background: #eef2f7;
+  color: #666;
+  text-decoration: line-through;
+}
