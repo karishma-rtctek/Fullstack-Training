@@ -64,8 +64,8 @@ const BlogForm = ({ post, onSubmit, onCancel }: BlogFormProps) => {
         />
       </div>
 
-      <div className="form-actions">
-        <button type="submit">{post ? 'Update' : 'Create'} Post</button>
+      <div className="form-actions" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button type="submit" style={{backgroundColor:"cornflowerblue", color:"white"}}>{post ? 'Update' : 'Create'} Post</button>
         <button type="button" onClick={onCancel}>Cancel</button>
       </div>
     </form>
