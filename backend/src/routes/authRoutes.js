@@ -1,9 +1,9 @@
 import express from "express";
+import { signup, login } from "../controllers/authController.js";
+
 const router = express.Router();
 
-// temp test route
-router.get("/", (req, res) => {
-  res.send("Auth Route Working");
-});
+router.post("/signup", signup);
+router.post("/login", login);
 
 export default router;
