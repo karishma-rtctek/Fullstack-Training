@@ -1,8 +1,15 @@
 import express from "express";
+import {
+  placeOrder,
+  getUserOrders,
+  getOrderDetails,
+} from "../controllers/orderController.js";
+import { authMiddleware } from "../middleware/auth.js";
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Order Routes Working");
-});
+router.post("/", authMiddleware, placeOrder);
+router.get("/", authMiddleware, getUserOrders);
+router.get("/:id", authMiddleware, getOrderDetails);
 
 export default router;
