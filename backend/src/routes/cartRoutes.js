@@ -10,14 +10,15 @@ router.get("/", async (req, res) => {
   try {
     const [rows] = await pool.execute(
       `SELECT 
-         cart.id AS cartId,
-         products.id AS productId,
-         products.title AS name,
-         products.price,
-         products.image,
-         cart.quantity
-       FROM cart
-       JOIN products ON cart.product_id = products.id`
+    cart.id AS "cartId",
+    products.id AS "productId",
+    products.title AS name,
+    products.price,
+    products.image,
+    cart.quantity
+FROM cart
+JOIN products ON cart.product_id = products.id
+`
     );
 
     res.json(rows);
