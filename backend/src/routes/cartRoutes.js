@@ -1,6 +1,5 @@
 import express from "express";
-// import db from "../config/db.js";
-import db from "../config/dbWrapper.js";
+import pool from "../config/dbWrapper.js";
 
 const router = express.Router();
 
@@ -9,11 +8,11 @@ const router = express.Router();
 ============================= */
 router.get("/", async (req, res) => {
   try {
-    const [rows] = await db.execute(
+    const [rows] = await pool.execute(
       `SELECT 
          cart.id AS cartId,
          products.id AS productId,
-         products.name,
+         products.title AS name,
          products.price,
          products.image,
          cart.quantity
@@ -34,7 +33,7 @@ router.post("/add", async (req, res) => {
   const { productId, quantity } = req.body;
 
   try {
-    await db.execute(
+    await pool.execute(
       "INSERT INTO cart (product_id, quantity) VALUES (?, ?)",
       [productId, quantity]
     );
@@ -52,7 +51,7 @@ router.put("/update/:cartId", async (req, res) => {
   const { quantity } = req.body;
 
   try {
-    await db.execute("UPDATE cart SET quantity=? WHERE id=?", [
+    await pool.execute("UPDATE cart SET quantity=? WHERE id=?", [
       quantity,
       req.params.cartId,
     ]);
@@ -68,7 +67,7 @@ router.put("/update/:cartId", async (req, res) => {
 ============================= */
 router.delete("/remove/:cartId", async (req, res) => {
   try {
-    await db.execute("DELETE FROM cart WHERE id=?", [req.params.cartId]);
+    await pool.execute("DELETE FROM cart WHERE id=?", [req.params.cartId]);
 
     res.json({ message: "Removed from cart" });
   } catch (err) {

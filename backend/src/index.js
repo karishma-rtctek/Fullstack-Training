@@ -10,7 +10,14 @@ import cartRoutes from "./routes/cartRoutes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like Postman) or any origin
+    callback(null, true);
+  },
+  credentials: true, // allow cookies
+}));
+
 app.use(express.json());
 
 // Routes

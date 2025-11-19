@@ -1,6 +1,5 @@
 import express from "express";
-// import db from "../config/db.js";
-import db from "../config/dbWrapper.js";
+import pool from "../config/dbWrapper.js";
 
 const router = express.Router();
 
@@ -19,13 +18,13 @@ router.get("/", async (req, res) => {
     const offset = (page - 1) * limit;
 
     // Fetch products for this page
-    const [products] = await db.query(
+    const [products] = await pool.query(
       "SELECT * FROM products LIMIT ? OFFSET ?",
       [limit, offset]
     );
 
     // Get total number of products to compute total pages
-    const [[{ total }]] = await db.query(
+    const [[{ total }]] = await pool.query(
       "SELECT COUNT(*) as total FROM products"
     );
 
@@ -48,7 +47,7 @@ router.get("/", async (req, res) => {
 ============================= */
 router.get("/:id", async (req, res) => {
   try {
-    const [rows] = await db.execute("SELECT * FROM products WHERE id = ?", [
+    const [rows] = await pool.execute("SELECT * FROM products WHERE id = ?", [
       req.params.id,
     ]);
 
@@ -68,7 +67,7 @@ router.post("/", async (req, res) => {
   const { name, price, description, image } = req.body;
 
   try {
-    const [result] = await db.execute(
+    const [result] = await pool.execute(
       "INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)",
       [name, price, description, image]
     );
@@ -86,7 +85,7 @@ router.put("/:id", async (req, res) => {
   const { name, price, description, image } = req.body;
 
   try {
-    const [result] = await db.execute(
+    const [result] = await pool.execute(
       `UPDATE products 
        SET name=?, price=?, description=?, image=? 
        WHERE id=?`,
@@ -107,7 +106,7 @@ router.put("/:id", async (req, res) => {
 ============================= */
 router.delete("/:id", async (req, res) => {
   try {
-    const [result] = await db.execute("DELETE FROM products WHERE id = ?", [
+    const [result] = await pool.execute("DELETE FROM products WHERE id = ?", [
       req.params.id,
     ]);
 
