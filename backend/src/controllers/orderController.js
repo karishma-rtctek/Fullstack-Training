@@ -1,4 +1,5 @@
-import pool from "../config/db.js";
+// import pool from "../config/db.js";
+import pool from "../config/dbWrapper.js";
 
 // CREATE ORDER
 export const placeOrder = async (req, res) => {

@@ -1,4 +1,5 @@
-import pool from "../config/db.js";
+// import pool from "../config/db.js";
+import pool from "../config/dbWrapper.js";
 
 // CREATE PRODUCT
 export const addProduct = async (req, res) => {

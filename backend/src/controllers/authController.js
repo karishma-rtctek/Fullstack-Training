@@ -1,4 +1,5 @@
-import pool from "../config/db.js";
+// import pool from "../config/db.js";
+import pool from "../config/dbWrapper.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
