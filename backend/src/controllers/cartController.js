@@ -1,4 +1,4 @@
-import pool from "../config/db.js"; // or prisma
+import pool from "../config/dbWrapper.js";
 
 export const getCart = async (req, res) => {
   try {

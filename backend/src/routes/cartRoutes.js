@@ -31,19 +31,35 @@ JOIN products ON cart.product_id = products.id
     ADD TO CART
 ============================= */
 router.post("/add", async (req, res) => {
-  const { productId, quantity } = req.body;
+  const { productId, quantity = 1 } = req.body;
 
   try {
-    await pool.execute(
-      "INSERT INTO cart (product_id, quantity) VALUES (?, ?)",
-      [productId, quantity]
+    // 1️⃣ Check if product is already in cart
+    const [existing] = await pool.query(
+      "SELECT * FROM cart WHERE product_id = ?",
+      [productId]
     );
 
-    res.json({ message: "Added to cart" });
+    if (existing.length > 0) {
+      // 2️⃣ If exists → increment quantity
+      await pool.query(
+        "UPDATE cart SET quantity = quantity + ? WHERE product_id = ?",
+        [quantity, productId]
+      );
+    } else {
+      // 3️⃣ If not exists → insert new row
+      await pool.query(
+        "INSERT INTO cart (product_id, quantity) VALUES (?, ?)",
+        [productId, quantity]
+      );
+    }
+
+    res.json({ message: "Cart updated" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 /* =============================
     UPDATE QUANTITY

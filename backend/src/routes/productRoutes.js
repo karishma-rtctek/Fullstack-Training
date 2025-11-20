@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
 
   try {
     const [result] = await pool.execute(
-      "INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)",
+      "INSERT INTO products (title, price, description, image) VALUES ($1, $2, $3, $4)",
       [name, price, description, image]
     );
 
@@ -87,8 +87,8 @@ router.put("/:id", async (req, res) => {
   try {
     const [result] = await pool.execute(
       `UPDATE products 
-       SET name=?, price=?, description=?, image=? 
-       WHERE id=?`,
+      SET title=$1, price=$2, description=$3, image=$4 
+      WHERE id=$5`,
       [name, price, description, image, req.params.id]
     );
 
